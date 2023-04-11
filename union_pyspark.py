@@ -39,10 +39,27 @@ disDF = df.union(df2).distinct()
 print("union and distinct dataframe " + str(disDF.count())) 
 disDF.show(truncate=False)
 
+# added filter with union all to filter all the employee above age 30 
 unionAllDF = df.unionAll(df2).filter(col("age")>30) 
  
 print("using union all dataframe " + str(unionAllDF.count()))
 unionAllDF.show(truncate=False) 
 
+# performing union by name 
+byNameUnion = df.unionByName(df2)
+print("union by name dataframe " + str(byNameUnion.count()))
+byNameUnion.show(truncate=False) 
 
+
+
+
+# union by name with different number of columns 
+# Create DataFrames with different column names
+df1 = spark.createDataFrame([[5, 2, 6]], ["col0", "col1", "col2"])
+df2 = spark.createDataFrame([[6, 7, 3]], ["col1", "col2", "col3"])
+
+# Using allowMissingColumns
+df3 = df1.unionByName(df2, allowMissingColumns=True)
+df3.printSchema
+df3.show()
 
