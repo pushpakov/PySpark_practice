@@ -162,17 +162,32 @@ lit_fun = df4.select(col("id"),lit("22").alias("business_id"))
 # pyspark collect function to retrieve the data from dataframe 
 
 # collect to retrieve data from df4
-dataCollect = df4.collect()[0][0]
-print(dataCollect) 
+dataCollect = df4.collect()
+# print(dataCollect) 
 
-for row in dataCollect:
-    name = row['name']['firstname'] + ' ' + row['name']['middlename'] + ' ' + row['name']['lastname']
-    id = row['id']
-    gender = row['gender']
-    salary = row['salary']
+# for row in dataCollect:
+#     name = row['name']['firstname'] + ' ' + row['name']['middlename'] + ' ' + row['name']['lastname']
+#     id = row['id']
+#     gender = row['gender']
+#     salary = row['salary']
 
-    print(f"Name: {name}, ID: {id}, Gender: {gender}, Salary: {salary}")
+#     print(f"Name: {name}, ID: {id}, Gender: {gender}, Salary: {salary}")
 
 
+
+# change datatype using pyspark withColumn() and updating the existing value of column
+# df4.withColumn("salary",col("salary").cast("String")*5).show()
+
+
+# add a new column using withColumn()
+# df4.withColumn("Country",lit("USA")).show()
+
+
+# rename column name 
+# df4.withColumnRenamed("gender","sex").show()
+
+
+# drop column from pyspark data 
+df4.drop("salary").show()
 
 
