@@ -26,12 +26,12 @@ df.printSchema()
 df.show(truncate=False)
 
 
-# # get distinct rows by comparing all the columns 
-# distinctDF = df.distinct()
-# print("Total count : " +str(df.count())) 
+# get distinct rows by comparing all the columns 
+distinctDF = df.distinct()
+print("Total count : " +str(df.count())) 
 
-# print("Distinct count : " +str(distinctDF.count())) 
-# distinctDF.show() 
+print("Distinct count : " +str(distinctDF.count())) 
+distinctDF.show() 
 
 
 # distinct of selected multiple columns 
@@ -41,7 +41,19 @@ print("Distinct count of department and salary :  "+ str(dropDisDF.count()))
 dropDisDF.show()   
 
 
+# sort using sort function 
+df.sort("employee_name", "salary").show() 
+
+# sort using orderby 
+df.orderBy("employee_name", "salary").show() 
+
+# using asc and desc 
+df.sort(df.department.asc(),df.salary.asc()).show()
+df.sort(df.department.desc(),df.salary.desc()).show() 
 
 
+# groupby 
+df.groupBy("department").sum("salary").show() 
 
-
+# number of employee in each department 
+df.groupBy('department').count().show() 
