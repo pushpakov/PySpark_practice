@@ -1,8 +1,7 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType
+from pyspark.sql.functions import col, lit
 
-from pyspark.sql.functions import lit
-colObj = lit("Spark_practice_app")   
 
 
 spark = SparkSession.builder.appName('Spark_practice_app').getOrCreate()
@@ -118,19 +117,61 @@ df4 = spark.createDataFrame(data=structureData,schema=structureSchema)
 
 
 # this will print all the values for the column 
-df4.show(n=df4.count(),truncate=False)  
+# df4.show(n=df4.count(),truncate=False)  
 
 # converting to json 
 # print(df4.schema.json())
 
 
+# creating new column using lit and col 
+lit_fun = df4.select(col("id"),lit("22").alias("business_id")) 
+# lit_fun.show()
+
+# df4.show(n=df4.count(),truncate=False)  
+
+
+# selecting column from dataframe 
+
+# selecting single or multiple column from pyspark 
+# df4.select("name","id").show()
+
+# selecting all the column from the list
+# df4.select(df4['*']).show() 
+# df4.select('*').show() 
+
+
+# select column by index 
+# df4.select(df4.columns[:3]).show(3)  # this will show first 3 column and first 3 rows
+
+
+#Selects columns 1 to 3  and top 3 rows
+# df4.select(df4.columns[1:3]).show(3)
+
+# this will show name with first 3 rows 
+# df4.select('name').show(3) 
+
+# to select the firstname and lastname from the name column
+# df4.select("name.firstname","name.lastname").show(truncate=False)
 
 
 
+# to get all the column from the struct column 
+# df4.select('name.*').show(truncate=False) 
 
 
+# pyspark collect function to retrieve the data from dataframe 
 
+# collect to retrieve data from df4
+dataCollect = df4.collect()[0][0]
+print(dataCollect) 
 
+for row in dataCollect:
+    name = row['name']['firstname'] + ' ' + row['name']['middlename'] + ' ' + row['name']['lastname']
+    id = row['id']
+    gender = row['gender']
+    salary = row['salary']
+
+    print(f"Name: {name}, ID: {id}, Gender: {gender}, Salary: {salary}")
 
 
 
