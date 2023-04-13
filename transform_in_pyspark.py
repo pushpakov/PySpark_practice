@@ -54,4 +54,4 @@ print("dataframe with array ")
 df.show()
 
 # using transform() SQL function
-df.select(transform("Languages1","Languages2", lambda x,y: upper(x,y)).alias("languages1"),"Languages2").show()  
+df.select(transform("Languages1", lambda x: upper(x)).alias("languages1")).show()   

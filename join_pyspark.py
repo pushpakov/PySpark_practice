@@ -31,50 +31,50 @@ deptDF.printSchema()
 deptDF.show(truncate=False)
 
 
-# inner join dataframe 
-print("inner") 
-empDF.join(deptDF,empDF.emp_dept_id == deptDF.dept_id,"inner").show()
+# inner join dataframe
+print("inner")
+empDF.join(deptDF, empDF.emp_dept_id == deptDF.dept_id, "inner").show()
 
-# outer join 
+# outer join
 print("outer")
-empDF.join(deptDF,empDF.emp_dept_id == deptDF.dept_id,"outer").show()
+empDF.join(deptDF, empDF.emp_dept_id == deptDF.dept_id, "outer").show()
 
-# full join 
+# full join
 print("full")
-empDF.join(deptDF,empDF.emp_dept_id == deptDF.dept_id,"full").show()
+empDF.join(deptDF, empDF.emp_dept_id == deptDF.dept_id, "full").show()
 
-# full outer 
+# full outer
 print("fullouter")
-empDF.join(deptDF,empDF.emp_dept_id == deptDF.dept_id,"fullouter").show() 
+empDF.join(deptDF, empDF.emp_dept_id == deptDF.dept_id, "fullouter").show()
 
 
 # left join
-print("left") 
-empDF.join(deptDF,empDF.emp_dept_id == deptDF.dept_id,"left").show() 
+print("left")
+empDF.join(deptDF, empDF.emp_dept_id == deptDF.dept_id, "left").show()
 
 
 # right join
-print("right") 
-empDF.join(deptDF,empDF.emp_dept_id == deptDF.dept_id,"right").show() 
+print("right")
+empDF.join(deptDF, empDF.emp_dept_id == deptDF.dept_id, "right").show()
 
 
 # left semi join (it is similar to inner join but it returns all columns from the left dataset and ignores all columns from the right dataset )
 
-print("leftsemi") 
-empDF.join(deptDF,empDF.emp_dept_id == deptDF.dept_id,"leftsemi").show() 
+print("leftsemi")
+empDF.join(deptDF, empDF.emp_dept_id == deptDF.dept_id, "leftsemi").show()
 
 
 # left anti join (it does the exact opposite of the leftsemi, leftanti join returns only columns from the left dataset for non-matched records)
 
-print("leftanti") 
-empDF.join(deptDF,empDF.emp_dept_id == deptDF.dept_id,"leftanti").show() 
+print("leftanti")
+empDF.join(deptDF, empDF.emp_dept_id == deptDF.dept_id, "leftanti").show()
 
 
-# self join to join dataframe to itself 
-print("self join")  
-empDF.alias("emp1").join(empDF.alias("emp2"), \
-    col("emp1.superior_emp_id") == col("emp2.emp_id"),"inner") \
-    .select(col("emp1.emp_id"),col("emp1.name"), \
-      col("emp2.emp_id").alias("superior_emp_id"), \
-      col("emp2.name").alias("superior_emp_name")) \
-   .show(truncate=False)
+# self join to join dataframe to itself
+print("self join") 
+empDF.alias("emp1").join(empDF.alias("emp2"),
+                         col("emp1.superior_emp_id") == col("emp2.emp_id"), "inner") \
+    .select(col("emp1.emp_id"), col("emp1.name"),
+            col("emp2.emp_id").alias("superior_emp_id"),
+            col("emp2.name").alias("superior_emp_name")) \
+    .show(truncate=False)

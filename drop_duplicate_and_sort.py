@@ -57,3 +57,4 @@ df.groupBy("department").sum("salary").show()
 
 # number of employee in each department 
 df.groupBy('department').count().show() 
+
